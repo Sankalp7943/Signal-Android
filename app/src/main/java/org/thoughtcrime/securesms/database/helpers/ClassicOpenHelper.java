@@ -1133,7 +1133,7 @@ public class ClassicOpenHelper extends SQLiteOpenHelper {
 
           members.add(DelimiterUtil.escape(TextSecurePreferences.getLocalNumber(context), ','));
 
-          Collections.sort(members);
+          Collections.sort(members, String.CASE_INSENSITIVE_ORDER);
 
           String        encodedGroupId = "__signal_mms_group__!" + Hex.toStringCondensed(groupId);
           ContentValues groupValues    = new ContentValues();

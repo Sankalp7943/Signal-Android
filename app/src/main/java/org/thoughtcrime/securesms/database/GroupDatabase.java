@@ -258,7 +258,7 @@ public final class GroupDatabase extends Database {
   }
 
   public GroupId.Mms getOrCreateMmsGroupForMembers(List<RecipientId> members) {
-    Collections.sort(members);
+    Collections.sort(members, String.CASE_INSENSITIVE_ORDER);
 
     Cursor cursor = databaseHelper.getReadableDatabase().query(TABLE_NAME, new String[] {GROUP_ID},
                                                                MEMBERS + " = ? AND " + MMS + " = ?",
@@ -415,7 +415,7 @@ public final class GroupDatabase extends Database {
     RecipientId       groupRecipientId  = recipientDatabase.getOrInsertFromGroupId(groupId);
     List<RecipientId> members           = new ArrayList<>(new HashSet<>(memberCollection));
 
-    Collections.sort(members);
+    Collections.sort(members, String.CASE_INSENSITIVE_ORDER);
 
     ContentValues contentValues = new ContentValues();
     contentValues.put(RECIPIENT_ID, groupRecipientId.serialize());
@@ -640,7 +640,7 @@ public final class GroupDatabase extends Database {
   }
 
   public void updateMembers(@NonNull GroupId groupId, List<RecipientId> members) {
-    Collections.sort(members);
+    Collections.sort(members, String.CASE_INSENSITIVE_ORDER);
 
     ContentValues contents = new ContentValues();
     contents.put(MEMBERS, RecipientId.toSerializedList(members));
